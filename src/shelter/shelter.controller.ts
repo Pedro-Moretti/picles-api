@@ -22,7 +22,7 @@ export class ShelterController {
 
     //Atualização dos animais no shelter
     @Put()
-    async updateShelterDetails(@Body() input: UpdateShelterControllerInput): Promise<UpdateShelterDetailsUseCaseInput>{
+    async updateShelterDetails(@Body() input: UpdateShelterControllerInput): Promise<UpdateShelterDetailsUseCaseOutput>{
        const useCaseInput = new UpdateShelterDetailsUseCaseInput ({ ...input });
        return await this.updateShelterDetailsUseCase.run(useCaseInput);
     }
