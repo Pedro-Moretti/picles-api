@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ShelterModule } from './shelter/shelter.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PetModule } from './pet/pet.module';
 
 @Module({
   imports: [ConfigModule.forRoot(), MongooseModule.forRootAsync({
@@ -14,6 +15,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
   }),
   ShelterModule,
+  PetModule,
 ],
   controllers: [AppController],
   providers: [AppService],
