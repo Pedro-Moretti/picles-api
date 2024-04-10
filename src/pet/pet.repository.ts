@@ -3,6 +3,7 @@ import IPetRepository from "./interfaces/pet.repository.interface";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Pet } from "./schemas/pet.schema";
+import { promises } from "dns";
 
 @Injectable()
 export default class PetRepository implements IPetRepository {
@@ -22,5 +23,16 @@ export default class PetRepository implements IPetRepository {
             createdAt: new Date(),
             updatedAt: new Date()
         })
+    }
+
+    async updateById(data: Partial<Pet>): Promise<void> {
+        await this.petModel.updateOne(
+            {
+            _id: data._id
+            }, {
+                ...data,
+                updatedAt: new Date()
+            }
+    )
     }
 }
