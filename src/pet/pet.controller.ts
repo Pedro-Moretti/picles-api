@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Inject, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Inject, NotFoundException, Param, Patch, Post, Put } from '@nestjs/common';
 import CreatePetControllerInput from './dtos/create.pet.controller.input';
 import PetTokens from './pet.token';
 import CreatePetUseCaseInput from './usecases/dtos/create.pet.usecase.input';
@@ -56,7 +56,7 @@ export class PetController {
     }
 
     @Delete(':id')
-    async deletePet(@Param('id') id: string) {
+    async deletePet(@Param('id') id: string): Promise<DeletePetByIdUseCaseOutput> {
         try {
             const useCaseInput = new DeletePetByIdUseCaseInput({ id })
             return await this.deletePetByIdUseCase.run(useCaseInput)
@@ -64,4 +64,10 @@ export class PetController {
             throw new BadRequestException(JSON.parse(error.message))
         }
     }
+
+    @Patch(':photo')
+    async patchPet(@Param('photo') photo: string) {
+        
+    }
+
 }
