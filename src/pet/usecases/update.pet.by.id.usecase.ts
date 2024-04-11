@@ -24,7 +24,8 @@ export default class UpdatePetByIdUseCase implements IUseCase<UpdatePetByIdUseCa
         }
 
         await this.petRepository.updateById({
-            ...input
+            ...input,
+            _id: input.id
         });
 
         pet = await this.getPetById(input.id);
