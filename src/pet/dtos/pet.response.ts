@@ -1,4 +1,3 @@
-import { constructor } from "express";
 import { Pet } from "../schemas/pet.schema";
 
 export default class PetResponse {
@@ -12,14 +11,14 @@ export default class PetResponse {
     createdAt: Date;
     updatedAt: Date;
 
-    static fromPet(data: Pet) PetResponse {
+    static fromPet(data: Pet): PetResponse {
         return new PetResponse({
             ...data,
             id: data._id,
         });
     }
 
-    constructor (data: Partial<PetResponse>) {
+    constructor(data: Partial<PetResponse>) {
         Object.assign(this, data);
-    }
+        }
 }
