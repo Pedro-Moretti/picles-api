@@ -11,6 +11,8 @@ export default class PetResponse {
     createdAt: Date;
     updatedAt: Date;
 
+
+    //adicionar tratamento de UPPER CASE e lower case
     static fromPet(data: Pet): PetResponse {
         return new PetResponse({
             id: data._id,
