@@ -18,7 +18,7 @@ import UpdatePetPhotoByIdUseCaseInput from './usecases/dtos/update.pet.photo.by.
 import UpdatePetPhotoByIdUseCaseOutput from './usecases/dtos/update.pet.photo.by.id.usecase.output';
 import GetPetsUseCaseInput from './usecases/dtos/get.pets.usecase.input';
 import GetPetsUseCaseOutPut from './usecases/dtos/get.pets.usecase.output';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('pet')
 export class PetController {
@@ -43,6 +43,7 @@ export class PetController {
     
     @Post()
     @ApiResponse({ type: CreatePetUseCaseOutput })
+    @ApiOperation({})
     async createPet(@Body() input: CreatePetControllerInput):  Promise<CreatePetUseCaseOutput> {
         const useCaseInput = new CreatePetUseCaseInput({ ...input })
         return await this.createPetUseCase.run(useCaseInput)
