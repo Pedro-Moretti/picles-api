@@ -8,7 +8,6 @@ import IPetRepository from "../interfaces/pet.repository.interface";
 import AppTokens from "src/app.token";
 import IFileService from "../interfaces/file.service.interface";
 import PetResponse from "../dtos/pet.response";
-import { query } from "express";
 
 @Injectable()
 export default class GetPetsUseCase implements IUseCase<GetPetsUseCaseInput, GetPetsUseCaseOutPut> {
@@ -28,8 +27,8 @@ export default class GetPetsUseCase implements IUseCase<GetPetsUseCaseInput, Get
 
         for (const currentPet of queryResponse.items) {
             if (currentPet.photo) {
-                const photoInBase64 = await this.fileService.readFile(currentPet.photo);
-                currentPet.photo = photoInBase64.toString('base64')
+                currentPet.photo = await this.fileService.readFileInBase64(currentPet.photo);
+                
             }
 
             petResponseList.push(PetResponse.fromPet(currentPet));

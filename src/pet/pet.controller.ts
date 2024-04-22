@@ -109,6 +109,7 @@ export class PetController {
             id,
             photoPath: photo.path
         })
+        console.log(photo.path)
         return await this.updatePetPhotoByIdUseCase.run(useCaseInput)
     }
 

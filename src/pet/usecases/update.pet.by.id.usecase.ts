@@ -15,12 +15,7 @@ export default class UpdatePetByIdUseCase implements IUseCase<UpdatePetByIdUseCa
     constructor(
         @Inject(PetTokens.petRepository)
         private readonly petRepository: IPetRepository,
-
-        @Inject(AppTokens.fileService)
-        private readonly fileService: IFileService
     ) { }
-
-        
 
     async run(input: UpdatePetByIdUseCaseInput): Promise<UpdatePetByIdUseCaseOutput> {
         
@@ -37,8 +32,6 @@ export default class UpdatePetByIdUseCase implements IUseCase<UpdatePetByIdUseCa
 
         pet = await this.getPetById(input.id);
 
-        const petPhoto = !!pet.photo ? (await this.fileService.readFile(pet.photo)).toString ('base64') : null
-
         return new UpdatePetByIdUseCaseOutput({
             id: pet._id,
             name: pet.name,
@@ -46,7 +39,7 @@ export default class UpdatePetByIdUseCase implements IUseCase<UpdatePetByIdUseCa
             size: pet.size,
             gender: pet.gender,
             bio: pet.bio,
-            photo: petPhoto,
+            photo: pet.photo,
             createdAt: pet.createdAt,
             updatedAt: pet.updatedAt,
         })
