@@ -7,14 +7,14 @@ import ShelterTokens from "../shelter.token";
 
 @Injectable()
 export default class UpdateShelterDetailsUseCase 
-implements IUseCase<UpdateShelterDetailsUseCaseInput, UpdateShelterDetailsUseCaseInput>
+implements IUseCase<UpdateShelterDetailsUseCaseInput, UpdateShelterDetailsUseCaseOutput>
 {
     constructor(
         @Inject(ShelterTokens.shelterRepository)
         private readonly shelterRepository: IShelterRepository
     ) { }
 
-    async run(input: UpdateShelterDetailsUseCaseInput): Promise<UpdateShelterDetailsUseCaseInput> {
+    async run(input: UpdateShelterDetailsUseCaseInput): Promise<UpdateShelterDetailsUseCaseOutput> {
         await this.shelterRepository.update(input)
 
         const shelter = await this.shelterRepository.get()
